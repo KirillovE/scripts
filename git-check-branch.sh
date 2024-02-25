@@ -15,17 +15,17 @@ fi
 # If it does and the branch pattern matches multiple branches, print the list of branches and exit
 # If it does not, repeat the process for remote branches
 # If the branch pattern matches no branches, print an error message and exit
-if [ $(git branch | grep -E "$branch_pattern" | wc -l) -eq 1 ]; then
-  git checkout $(git branch | grep -E "$branch_pattern")
-elif [ $(git branch | grep -E "$branch_pattern" | wc -l) -gt 1 ]; then
+if [ $(git branch | grep -Ei "$branch_pattern" | wc -l) -eq 1 ]; then
+  git checkout $(git branch | grep -Ei "$branch_pattern")
+elif [ $(git branch | grep -Ei "$branch_pattern" | wc -l) -gt 1 ]; then
   echo "Error: Multiple local branches match the pattern"
-  git branch | grep -E "$branch_pattern"
+  git branch | grep -Ei "$branch_pattern"
   exit 1
-elif [ $(git branch -r | grep -E "$branch_pattern" | wc -l) -eq 1 ]; then
-  git checkout $(git branch -r | grep -E "$branch_pattern")
-elif [ $(git branch -r | grep -E "$branch_pattern" | wc -l) -gt 1 ]; then
+elif [ $(git branch -r | grep -Ei "$branch_pattern" | wc -l) -eq 1 ]; then
+  git checkout $(git branch -r | grep -Ei "$branch_pattern")
+elif [ $(git branch -r | grep -Ei "$branch_pattern" | wc -l) -gt 1 ]; then
   echo "Error: Multiple remote branches match the pattern"
-  git branch -r | grep -E "$branch_pattern"
+  git branch -r | grep -Ei "$branch_pattern"
   exit 1
 else
   echo "Error: No branches match the pattern"
