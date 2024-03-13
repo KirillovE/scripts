@@ -22,7 +22,7 @@ elif [ $(git branch | grep -Ei "$branch_pattern" | wc -l) -gt 1 ]; then
   git branch | grep -Ei "$branch_pattern"
   exit 1
 elif [ $(git branch -r | grep -Ei "$branch_pattern" | wc -l) -eq 1 ]; then
-  git checkout $(git branch -r | grep -Ei "$branch_pattern")
+  git checkout --track $(git branch -r | grep -Ei "$branch_pattern")
 elif [ $(git branch -r | grep -Ei "$branch_pattern" | wc -l) -gt 1 ]; then
   echo "Error: Multiple remote branches match the pattern"
   git branch -r | grep -Ei "$branch_pattern"
